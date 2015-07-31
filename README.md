@@ -27,7 +27,7 @@ Math Your Food
 #### `divide` (`/`)
 
 ```
-(ramekin// jar-of-pb 10)
+(ramekin// jar-of-peanut-butter 10)
 # => {:nutrient data ... } 1/10th of a jar of peanut butter
 
 (ramekin// p&j-sandwhich 2)
@@ -49,8 +49,10 @@ Math Your Food
 
 
 ```
-(def pb-banana
-  (ramekin/+ pb-serving banana))
+(def peanut-butter-and -banana
+  (ramekin/+
+    peanut-butter-serving
+    banana))
 ```
 
 ### Difference
@@ -69,41 +71,112 @@ Math Your Food
 # => {:nutrient data for p&j sandwhich}
 ```
 
+Ramekins
+--------
+
+```
+# as ramekin (single-serving)
+```
 
 Data Structure
 ----------------
 
 ```clojure
 {
-  :calories
-  :fat {
-    :unsaturated
-    :mono-unsaturated
-    :poly-unsaturated
-    :saturated
-    :uncategorized
+  :calories              {:value 347,  :unit 'kcal }
+  :mass                  {:value 243,  :unit 'g    }
+  :macro-totals {
+    :fat                 {:value 24,   :unit 'g    }
+    :protein             {:value 30.6, :unit 'g    }
+    :carbs               {:value 2,    :unit 'g    }
   }
-  :est-glycemic-load
+  :fat {
+    :unsaturated         {:value 0,    :unit 'g    }
+    :mono-unsaturated    {:value 0,    :unit 'g    }
+    :poly-unsaturated    {:value 0,    :unit 'g    }
+    :saturated           {:value 8,    :unit 'g    }
+    :uncategorized       {:value 16,   :unit 'g    }
+  }
+  :est-glycemic-load     {:value 2,    :unit 'unitless }
   :protein {
-    :uncategorized
+    :tryptophan          {:value 406,  :unit 'mg }
+    :threonine           {:value 1351, :unit 'mg }
+    :isoleucine          {:value 1633, :unit 'mg }
+    :leucine             {:value 2644, :unit 'mg }
+    :lysine              {:value 2221, :unit 'mg }
+    :methionine          {:value 924,  :unit 'mg }
+    :cystine             {:value 661,  :unit 'mg }
+    :phenylalanine       {:value 1655, :unit 'mg }
+    :tyrosine            {:value 1215, :unit 'mg }
+    :valine              {:value 2088, :unit 'mg }
+    :arginine            {:value 1995, :unit 'mg }
+    :histidine           {:value 751,  :unit 'mg }
+    :alanine             {:value 1788, :unit 'mg }
+    :aspartic-acid       {:value 3231, :unit 'mg }
+    :glutamic-acid       {:value 4072, :unit 'mg }
+    :glycine             {:value 1050, :unit 'mg }
+    :proline             {:value 1247, :unit 'mg }
+    :serine              {:value 2364, :unit 'mg }
+    :hydroxyproline      {:value 0,    :unit 'mg }
+    :uncategorized       {:value 0,    :unit 'mg }
   }
   :carbohydrates {
-    :fiber
-    :sugar
+    :dietary-fiber       {:value 0,    :unit 'g  }
+    :sugar               {:value 2,    :unit 'g  }
   }
   :vitamins {
-
+    :a {
+      :beta-carotene     {:value 0,    :unit 'μg }
+      :retinol           {:value 0,    :unit 'μg }
+      :uncategorized     {:value 1183, :unit 'iu }
+    }
+    :c                   {:value 0,    :unit 'mg }
+    :d                   {:value 85.1, :unit 'iu }
+    :e {
+      :d-alpha-tocopherol           {:value 2.4, :unit 'mg }
+      :dl-alpha-tocopherol-acetate  {:value 0,   :unit 'mg }
+      :uncategorized                {:value 0,   :unit 'iu }
+    }
+    :k                   {:value .7,   :unit 'μg }
+    :thiamin             {:value .2,   :unit 'mg }
+    :riboflavin          {:value 1.2,  :unit 'mg }
+    :niacin              {:value .2,   :unit 'mg }
+    :b6                  {:value .3,   :unit 'mg }
+    :folate              {:value 114,  :unit 'μg }
+    :b12                 {:value 3.1,  :unit 'μg }
+    :biotin              {:value 0,    :unit 'mg }
+    :pantothenic-acid    {:value 3.5,  :unit 'mg }
+    :choline             {:value 610,  :unit 'mg }
+    :betaine             {:value 1.5,  :unit 'mg }
   }
   :minerals {
-
+    :sodium              {:value 340,  :unit 'mg }
+    :potassium           {:value 326,  :unit 'mg }
+    :calcium             {:value 129,  :unit 'mg }
+    :iron                {:value 4.4,  :unit 'mg }
+    :phosphorus          {:value 464,  :unit 'mg }
+    :magnisium           {:value 29.2, :unit 'mg }
+    :zinc                {:value 2.7,  :unit 'mg }
+    :selenium            {:value 77,   :unit 'μg }
+    :copper              {:value .2,   :unit 'mg }
+    :manganese           {:value .1,   :unit 'mg }
+    :chromium            {:value 0,    :unit 'mg }
+    :molybdenum          {:value 0,    :unit 'mg }
+    :chloride            {:value 0,    :unit 'mg }
+    :fluoride            {:value 2.7,  :unit 'mg }
   }
-  :sterols {}
+  :sterols {
+    :cholesterol         {:value 1028, :unit 'mg }
+  }
   :other {
-    :alcohol
-    :ash
-    :caffeine
+    :alcohol             {:value 0,    :unit 'g  }
+    :water               {:value 184,  :unit 'g  }
+    :ash                 {:value 2.1,  :unit 'g  }
+    :caffeine            {:value 0,    :unit 'mg }
+    :theobromine         {:value 0,    :unit 'mg }
   }
 }
+
 ```
 
 
