@@ -1,30 +1,63 @@
+```
+This library just sketches out an API, implementation is incomplete but coming soon. ^_^
+```
+
+
 Math Your Food
 ===============
 
-### Define
+### Define a food
+
+Pass a hash of nutrient data to `ramekin/nutrient-profile` to fill in the missing values.
 
 ```
-(def peanut-butter {:nutrient data ... for 2tbsp })
-(def jelly         {:nutrient data ... for 2tbsp })
-(def bread         {:nutrient data ... for 1 loaf })
+(def peanut-butter
+  (ramekin/nutrient-profile {:nutrient data ... for 2tbsp  }))
+
+(def jelly
+  (ramekin/nutrient-profile {:nutrient data ... for 2tbsp  }))
+
+(def bread
+  (ramekin/nutrient-profile {:nutrient data ... for 1 loaf }))
+```
+
+### Recipes (addition)
+
+#### Nutrient facts of whole recipes `add` (`+`)
+
+```
+(def p&j-sandwhich
+  (ramekin/+
+    (ramekin/scale peanut-butter {:to [4 "tbsp"   ] } )
+    (ramekin/scale jelly         {:to [1 "tbsp"   ] } )
+    (ramekin/scale bread         {:to [2 "slices" ] } )))
+
+# => {:nutrient profile for p&j sandwhich}
+```
+
+```
+(def peanut-butter-and-banana
+  (ramekin/+
+    peanut-butter-serving
+    banana))
 ```
 
 ### Portion
 
-#### `scale`
+#### Adjust serving size with `scale`
 
 ```
-(ramekin/scale peanut-butter "1" "tbsp")
-# => {:nutrient data ... for 1 tbsp}
+(ramekin/scale peanut-butter {:to [1 "tbsp"] })
+# => {:nutrient profile ... for 1 tbsp}
 
-(ramekin/scale peanut-butter "2" "tbsp")
-# => {:nutrient data ... for 2 tbsp}
+(ramekin/scale peanut-butter {:to [2 "tbsp"] })
+# => {:nutrient profile ... for 2 tbsp}
 
-(ramekin/scale peanut-butter "4" "tbsp")
-# => {:nutrient data ... for 4 tbsp}
+(ramekin/scale peanut-butter {:to [4 "tbsp"] })
+# => {:nutrient profile ... for 4 tbsp}
 ```
 
-#### `divide` (`/`)
+#### Split a recepie into servings with `divide` (`/`)
 
 ```
 (ramekin// jar-of-peanut-butter 10)
@@ -34,32 +67,15 @@ Math Your Food
 # => 1 half p&j sandwhich
 ```
 
-### Recipes (addition)
-
-#### `add` (`+`)
-
-```
-(def p&j-sandwhich
-  (ramekin/+
-    (ramekin/scale peanut-butter {:to "4 tbsp"   } )
-    (ramekin/scale jelly         {:to "1 tbsp"   } )
-    (ramekin/scale bread         {:to "2 slices" } )))
-# => {:nutrient data for p&j sandwhich}
-```
-
-
-```
-(def peanut-butter-and -banana
-  (ramekin/+
-    peanut-butter-serving
-    banana))
-```
 
 ### Difference
 
 ```
 (ramekin/- apple orange)
 # => {:diff between apple and orange }
+
+(ramekin/- p&j-sandwhich jelly)
+# => {:nutrient profile of peanutbutter sandwhich}
 ```
 
 ### Leftovers
@@ -67,15 +83,10 @@ Math Your Food
 #### `subtract` (`-`)
 
 ```
-(ramekin/- p&j-sandwhich (ramekin/* .5 p&j-sandwhich))
-# => {:nutrient data for p&j sandwhich}
-```
+(ramekin/- p&j-sandwhich
+           (ramekin/* 0.5 p&j-sandwhich))
 
-Ramekins
---------
-
-```
-# as ramekin (single-serving)
+# => {:nutrient profile for 1/2 p&j sandwhich}
 ```
 
 Data Structure
